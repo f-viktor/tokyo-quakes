@@ -16,7 +16,9 @@ type inputArgs struct {
 
 // parse command line arguments
 func ParseArgs() inputArgs {
-	currentTime := time.Now()
+	// load time zone
+	loc, _ := time.LoadLocation("Asia/Tokyo") // use other time zones such as MST, IST
+	currentTime := time.Now().In(loc)
 	prefectures := flag.String("pref", "", "Which prefectures to query, (comma separated: Tokyo, Hokkaido, Aomori, etc)")
 	cities := flag.String("city", "", "Which cities to query (leave blank for every city in prefecture, otherwise comma separated: Noboribetsu, Chiyoda, Bunkyo, etc))")
 	minimumIntensity := flag.Int("mini", 2, "Minimum intensity of earthquakes to query")
